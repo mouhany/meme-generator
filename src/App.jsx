@@ -1,12 +1,11 @@
-import "./App.css";
 import Header from "./components/Header";
-import Content from "./components/Content";
+import Meme from "./components/Meme";
 
 function App() {
   return (
     <div>
       <Header />
-      <Content />
+      <Meme />
     </div>
   );
 }
