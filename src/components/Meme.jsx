@@ -1,13 +1,17 @@
 import memesData from "../memesData";
-
-function getMemeImage() {
-  const memesAray = memesData.data.memes
-  const randomNumber = Math.floor(Math.random() * memesAray.length)
-  const url = memesAray[randomNumber].url
-  console.log(url)
-}
+import { useState } from "react";
 
 function Meme() {
+  const [memeImage, setMemeImage] = useState("");
+
+  function getMemeImage() {
+    const memesAray = memesData.data.memes;
+    const randomNumber = Math.floor(Math.random() * memesAray.length);
+    const url = memesAray[randomNumber].url;
+    console.log(url);
+    setMemeImage(url);
+  }
+
   return (
     <div className="my-12 p-4 sm:p-6 max-w-xl mx-auto border flex flex-col justify-between gap-9 sm:gap-6">
       <div className="flex flex-col sm:flex-row sm:justify-between gap-6">
@@ -40,6 +44,7 @@ function Meme() {
       >
         Get a new meme image 🖼
       </button>
+      <img src={memeImage} />
     </div>
   );
 }
