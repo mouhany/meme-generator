@@ -1,3 +1,4 @@
+@import url("https://fonts.cdnfonts.com/css/impact");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,4 +7,15 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+}
+
+.impact {
+  @apply w-4/5 absolute text-center uppercase text-5xl tracking-wide text-white right-1/2 translate-x-1/2;
+  font-family: "Impact", sans-serif;
+  text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000,
+    2px 2px 0 #000;
+}
+
+.getmemeimage {
+  @apply p-2 rounded-md bg-gradient-to-r from-seance-900 to-seance-700 text-white;
 }
