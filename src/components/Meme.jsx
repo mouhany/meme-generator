@@ -1,13 +1,18 @@
-import memesData from "../memesData";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function Meme() {
-  const [memeImage, setMemeImage] = useState(memesData);
+  const [allMemes, setAllMemes] = useState([]); //Initialize with empty array
   const [meme, setMeme] = useState({
     topText: "",
     bottomText: "",
     randomImage: "http://i.imgflip.com/1bij.jpg",
   });
+
+  useEffect(() => {
+    fetch("https://api.imgflip.com/get_memes")
+      .then((res) => res.json())
+      .then((data) => setAllMemes(data.data.memes));
+  }, []); //No dependencies array, will not run again
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -19,10 +24,9 @@ function Meme() {
     });
   }
 
-  function getMemeImage() {
-    const memesAray = memeImage.data.memes;
-    const randomNumber = Math.floor(Math.random() * memesAray.length);
-    const url = memesAray[randomNumber].url;
+  function getRandomMeme() {
+    const randomNumber = Math.floor(Math.random() * allMemes.length);
+    const url = allMemes[randomNumber].url;
     setMeme((prevState) => {
       return {
         ...prevState,
@@ -64,14 +68,14 @@ function Meme() {
         </div>
       </div>
       <button
-        className="getmemeimage"
-        onClick={getMemeImage}
+        className="p-2 rounded-md bg-gradient-to-r from-seance-900 to-seance-700 text-white focus:outline-none focus:ring-2 focus:ring-seance-600"
+        onClick={getRandomMeme}
       >
         Get a new meme image 🖼
       </button>
       <div className="relative">
-        <p className="impact top-1">{meme.topText}</p>
-        <p className="impact bottom-1">{meme.bottomText}</p>
+        <p className="impact top-[0.2em] sm:top-1">{meme.topText}</p>
+        <p className="impact bottom-[0.2em] sm:bottom-1">{meme.bottomText}</p>
         <img className="w-full" src={meme.randomImage} />
       </div>
     </main>
